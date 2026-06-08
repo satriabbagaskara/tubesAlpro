@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-const maxPengguna = 1000
+const maxPengguna = 1111
 type dataSampah struct {
 	id int
 	nama string
