@@ -41,6 +41,7 @@ func dummy(user *tabDataSampah) {
 	halamanUtama(user, &banyakOrang)
 }
 
+// interface halaman utama
 func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 	var inputPilihan int
 	fmt.Println("__________________________________________________")
@@ -63,6 +64,7 @@ func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 	fmt.Print("\nMasukkan pilihan kamu yang mau kami jalankan: ")
 	fmt.Scan(&inputPilihan)
 
+	// pilihan input
 	if inputPilihan == 1 {
 		inputDataTambahan(user, banyakOrang)
 	} else if inputPilihan == 2{
@@ -88,6 +90,7 @@ func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 		halamanUtama(user, banyakOrang)
 	}
 }
+// memeriksa id random nya sudah ada / belum
 func idSudahAda(user *tabDataSampah, banyakOrang *int, id int)bool{
 	var i int
 	for i = 1; i <= *banyakOrang; i++{
@@ -97,6 +100,7 @@ func idSudahAda(user *tabDataSampah, banyakOrang *int, id int)bool{
 	}
 	return false
 }
+// proses mendapatkan id secara random
 func dapatkanID(user *tabDataSampah, banyakOrang *int) int{
 	var randNum int
 	for {
@@ -107,6 +111,7 @@ func dapatkanID(user *tabDataSampah, banyakOrang *int) int{
 	}
 }
 
+// di interface jika pilih input data sampah
 func inputDataTambahan(user *tabDataSampah, banyakOrang *int) {
 	var banyakOrangBaru, i, totalOrangSementara, ID int
 	fmt.Println("__________________________________________________")
@@ -153,7 +158,7 @@ func inputDataTambahan(user *tabDataSampah, banyakOrang *int) {
 	halamanUtama(user, banyakOrang)
 }
 
-// --- PROCEDURE EDIT DATA --- // 
+// di interface jika memilih edit data
 func editData(user *tabDataSampah, banyakOrang *int) {
 	var gantiID int
 	var i, inputPilihan, IDpilihan int
@@ -326,7 +331,7 @@ func editData(user *tabDataSampah, banyakOrang *int) {
 	halamanUtama(user, banyakOrang)
 }
 
-// Procedure tampikan data warga (hybrid)
+// Procedure untuk menampilkan data yang dipilih
 func tampilData(user *tabDataSampah, banyakOrang *int) {
 	var i int
 	
@@ -356,7 +361,7 @@ func tampilData(user *tabDataSampah, banyakOrang *int) {
 	halamanUtama(user, banyakOrang)
 }
 
-// Procedure Hapus data warga 
+// Procedure Hapus data warga yang dipilih
 func hapusData(user *tabDataSampah, banyakOrang *int) {
 	var hapusWarga, i int
 	var keberadaan int
@@ -404,6 +409,7 @@ func salinData(user *tabDataSampah, temp *tabDataSampah, banyakOrang *int){
 		temp[i] = user[i]
 	}
 }
+
 // insertion sort menggunakan ID
 func insertionSortID(user *tabDataSampah, banyakOrang *int){
 	var pass, i int
@@ -434,6 +440,7 @@ func insertionSortNama(user *tabDataSampah, banyakOrang *int){
 		user[i] = temp
 	}
 }
+
 // binary search menggunakan ID
 func binarySearchID(user *tabDataSampah, banyakOrang *int, cariID int)int {
 	var kiri, kanan, mid int
@@ -472,6 +479,7 @@ func binarySearchNama(user *tabDataSampah, banyakOrang *int, cariNama string)int
 	}
 	return -1
 }
+
 // sequential search menggunakan ID
 func sequentialSearchID(user *tabDataSampah, banyakOrang *int, cariID int)int{
 	var i int
@@ -482,6 +490,7 @@ func sequentialSearchID(user *tabDataSampah, banyakOrang *int, cariID int)int{
 	}
 	return -1
 }
+
 // sequential search menggunakan Nama
 func sequentialSearchNama(user *tabDataSampah, banyakOrang *int, cariNama string)int{
 	var i int
@@ -492,7 +501,8 @@ func sequentialSearchNama(user *tabDataSampah, banyakOrang *int, cariNama string
 	}
 	return -1
 }
-// outputnya
+
+// Procedure outputnya
 func tampilanData(data dataSampah){
 	fmt.Println("\nData ditemukan!")
 	fmt.Println("======================<<>>========================")
@@ -504,7 +514,7 @@ func tampilanData(data dataSampah){
 	fmt.Println("======================<<>>========================")
 }
 
-// --- Procedure mencari data warga --- //
+// Procedure cari data warga
 func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 	var inputPilihan, cariID, idx int
 	var cariNama string
@@ -607,7 +617,7 @@ func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 	halamanUtama(user, banyakOrang)
 }
 
-// Procedure Statistik Data Sampah Mingguan (Satria)
+// Procedure Statistik Data Sampah Mingguan
 func statistikSampah(user *tabDataSampah, banyakOrang *int) {
 	var i, total int
 	var rata float64
@@ -661,3 +671,5 @@ func statistikSampah(user *tabDataSampah, banyakOrang *int) {
 	fmt.Println(" ")
 	halamanUtama(user, banyakOrang)
 }
+
+// any question?
