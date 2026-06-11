@@ -1,5 +1,6 @@
 package main
 
+// tes 0101
 import (
 	"fmt"
 	"math/rand"
