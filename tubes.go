@@ -84,7 +84,7 @@ func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 		cariDataWarga(user, banyakOrang)
 	} else if inputPilihan == 8 {
 		rankingData(user, banyakOrang)
-	} else if inputPilihan == 9 || inputPilihan > 9 {
+	} else  {
 		fmt.Printf("\n\n         -- Fitur belum tersedia --\n")
 		time.Sleep(2*time.Second)
 		halamanUtama(user, banyakOrang)
