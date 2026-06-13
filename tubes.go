@@ -379,7 +379,7 @@ func insertionSortRanking(user *tabDataSampah, banyakOrang *int) {
 	} else if inputPilihan == 2 {
 		insertionDescending(user, banyakOrang)
 
-		for i =1; i<=*banyakOrang; i++ {
+		for i = 1; i<=*banyakOrang; i++ {
 			fmt.Printf("Rank-%d   ", i)
 			fmt.Printf("Nama: %s  | Berat: %d\n--------------------------\n", user[i].nama, user[i].beratSampah)
 			time.Sleep(185 * time.Millisecond)
