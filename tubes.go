@@ -52,14 +52,15 @@ func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 	fmt.Println("         Algoritma pemrograman 2 - 2026           ")
 	fmt.Println("                 Satria X Zikri                   ")
 	fmt.Println("__________________________________________________")
-	
 	fmt.Println("| 1. Tambah data        | 2. Edit data            |")
 	fmt.Println("|_______________________|_________________________|")
 	fmt.Println("| 3. Hapus data         | 4. Statistik            |")
 	fmt.Println("|_______________________|_________________________|")
 	fmt.Println("| 5. Cari data warga    | 6. List data warga      |")
 	fmt.Println("|_______________________|_________________________|")
-	fmt.Println("| 7. Keluar aplikasi    | 8. Coming Soon          |")
+	fmt.Println("| 7. Keluar aplikasi    | 8. Ranking data         |")
+	fmt.Println("|_______________________|_________________________|")
+	fmt.Println("| 9. Coming Soon        | 10. Coming Soon         |")
 	fmt.Println("|_______________________|_________________________|")
 	
 	fmt.Print("\nMasukkan pilihan kamu yang mau kami jalankan: ")
@@ -81,15 +82,13 @@ func halamanUtama(user *tabDataSampah, banyakOrang *int) {
 		os.Exit(0)
 	} else if inputPilihan == 5{
 		cariDataWarga(user, banyakOrang)
-	} else if inputPilihan == 8 || inputPilihan > 8{
+	} else if inputPilihan == 8 {
+		rankingData(user, banyakOrang)
+	} else if inputPilihan == 9 || inputPilihan > 9 {
 		fmt.Printf("\n\n         -- Fitur belum tersedia --\n")
 		time.Sleep(2*time.Second)
 		halamanUtama(user, banyakOrang)
-	} else {
-		fmt.Printf("\n\n         -- Pilihan tidak tersedia --\n")
-		time.Sleep(2*time.Second)
-		halamanUtama(user, banyakOrang)
-	}
+	} 
 }
 // memeriksa id random nya sudah ada / belum
 func idSudahAda(user *tabDataSampah, banyakOrang *int, id int)bool{
@@ -331,6 +330,163 @@ func editData(user *tabDataSampah, banyakOrang *int) {
 	halamanUtama(user, banyakOrang)
 }
 
+func rankingData(user *tabDataSampah, banyakOrang *int) {
+	var inputPilihan int
+
+	fmt.Println("__________________________________________________")
+	fmt.Println("|                \033[36mRANKING DATA \033[0m                 |")
+	fmt.Println("|________________________________________________|")
+	fmt.Println("| metode pengurutan:                             |")
+	fmt.Println("|------------------------------------------------|")
+	fmt.Println("| 1. Insertion Sort       | 2. Selection Sort    |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Println("| 3. keluar               |                      |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Print("Input: ")
+	fmt.Scan(&inputPilihan)
+
+	if inputPilihan == 1 {
+		insertionSortRanking(user, banyakOrang)
+	} else if inputPilihan == 2 {
+		selectionRanking(user, banyakOrang)
+	}
+}
+
+func insertionSortRanking(user *tabDataSampah, banyakOrang *int) {
+	var inputPilihan, i int
+	fmt.Println("__________________________________________________")
+	fmt.Println("|                 \033[36mRANKING DATA \033[0m                  |")
+	fmt.Println("|________________________________________________|")
+	fmt.Println("| Opsi pengurutan:                               |")
+	fmt.Println("|------------------------------------------------|")
+	fmt.Println("| 1. Berat Ascending      | 2. Berat Descending  |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Println("| 3. keluar               |                      |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Print("Input: ")
+	fmt.Scan(&inputPilihan)
+
+	if inputPilihan == 1 {
+		insertionAscending(user, banyakOrang)
+
+		for i=1; i<=*banyakOrang; i++ {
+			fmt.Printf("Rank-%d   ", i)
+			fmt.Printf("Nama: %s  | Berat: %d\n--------------------------\n", user[i].nama, user[i].beratSampah)
+			time.Sleep(185 * time.Millisecond)
+		}
+		halamanUtama(user, banyakOrang)
+	} else if inputPilihan == 2 {
+		insertionDescending(user, banyakOrang)
+
+		for i=1; i<=*banyakOrang; i++ {
+			fmt.Printf("Rank-%d   ", i)
+			fmt.Printf("Nama: %s  | Berat: %d\n--------------------------\n", user[i].nama, user[i].beratSampah)
+			time.Sleep(185 * time.Millisecond)
+		}
+		halamanUtama(user, banyakOrang)
+	}
+}
+
+func insertionAscending(user *tabDataSampah, banyakOrang *int) {
+	var pass, i int
+	var temp dataSampah
+	for pass = 2; pass <= *banyakOrang; pass++ {
+			temp = user[pass]
+			i = pass
+
+			for i > 1 && temp.beratSampah < user[i-1].beratSampah {
+				user[i] = user[i-1]
+				i--
+			}
+			user[i] = temp
+		}
+}
+func insertionDescending(user *tabDataSampah, banyakOrang *int) {
+	var pass, i int
+	var temp dataSampah
+	for pass = 2; pass <= *banyakOrang; pass++ {
+		temp = user[pass]
+		i = pass
+
+		for i > 1 && temp.beratSampah < user[i-1].beratSampah {
+			user[i] = user[i-1]
+			i--
+		}
+		user[i] = temp
+	}
+}
+func selectionRanking(user *tabDataSampah, banyakOrang *int) {
+	var inputPilihan, i int
+	fmt.Println("__________________________________________________")
+	fmt.Println("|                 \033[36mRANKING DATA \033[0m                  |")
+	fmt.Println("|________________________________________________|")
+	fmt.Println("| Opsi pengurutan:                               |")
+	fmt.Println("|------------------------------------------------|")
+	fmt.Println("| 1. Berat Ascending      | 2. Berat Descending  |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Println("| 3. keluar               |                      |")
+	fmt.Println("|_________________________|______________________|")
+	fmt.Print("Input: ")
+	fmt.Scan(&inputPilihan)
+
+	if inputPilihan == 1 {
+		selectionAscending(user, banyakOrang)
+		for i=1; i<=*banyakOrang; i++ {
+			fmt.Printf("Rank-%d   ", i)
+			fmt.Printf("Nama: %s  | Berat: %d\n--------------------------\n", user[i].nama, user[i].beratSampah)
+			time.Sleep(185 * time.Millisecond)
+		}
+		halamanUtama(user, banyakOrang)
+
+	} else if inputPilihan == 2 {
+		selectionDescending(user, banyakOrang)
+		for i=1; i<=*banyakOrang; i++ {
+			fmt.Printf("Rank-%d   ", i)
+			fmt.Printf("Nama: %s  | Berat: %d\n--------------------------\n", user[i].nama, user[i].beratSampah)
+			time.Sleep(185 * time.Millisecond)
+		}
+		halamanUtama(user, banyakOrang)
+	}
+}
+func selectionAscending(user *tabDataSampah, banyakOrang *int) {
+	var pass, indexMin, i int
+	var temp dataSampah
+
+	for pass = 1; pass < *banyakOrang; pass++ {
+
+		indexMin = pass
+
+		for i = pass + 1; i <= *banyakOrang; i++ {
+			if user[i].beratSampah < user[indexMin].beratSampah {
+				indexMin = i
+			}
+		}
+
+		temp = user[pass]
+		user[pass] = user[indexMin]
+		user[indexMin] = temp
+	}
+}
+func selectionDescending(user *tabDataSampah, banyakOrang *int) {
+	var pass, indexMin, i int
+	var temp dataSampah
+
+	for pass = 1; pass < *banyakOrang; pass++ {
+
+		indexMin = pass
+
+		for i = pass + 1; i <= *banyakOrang; i++ {
+			if user[i].beratSampah > user[indexMin].beratSampah {
+				indexMin = i
+			}
+		}
+
+		temp = user[pass]
+		user[pass] = user[indexMin]
+		user[indexMin] = temp
+	}
+}
+
 // Procedure untuk menampilkan data yang dipilih
 func tampilData(user *tabDataSampah, banyakOrang *int) {
 	var i int
@@ -517,7 +673,6 @@ func tampilanData(data dataSampah){
 // Procedure cari data warga
 func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 	var inputPilihan, cariID, idx int
-	var cariNama string
 	var temp tabDataSampah
 
 	fmt.Println("____________________________________________________")
@@ -525,11 +680,11 @@ func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 	fmt.Println("|__________________________________________________|")
 	fmt.Println(" ")
 	fmt.Println("Pilihlah metode pencarian yang anda inginkan: ")
-	fmt.Println("+--------------------------------------------------+")
-	fmt.Println("| 1. Binary Search (ID)       | 4. Sequential Search (Nama)    |")
-	fmt.Println("| 2. Binary Search (Nama)     | 5. Kembali                     |")
-	fmt.Println("| 3. Sequential Search (ID)   |")
-	fmt.Println("+--------------------------------------------------+")
+	fmt.Println("+------------------------+-------------------------+")
+	fmt.Println("| 1. Binary Search       | 2. Sequential Search    |")
+	fmt.Println("|------------------------|-------------------------|")
+	fmt.Println("| 3. kembali             |                         |")
+	fmt.Println("+------------------------+-------------------------+")
 	fmt.Println(" ")
 	fmt.Print("Input: ")
 	fmt.Scan(&inputPilihan)
@@ -551,31 +706,14 @@ func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 			idx = binarySearchID(&temp, banyakOrang, cariID)
 
 			if idx == -1{
-				fmt.Println("ID tidak ditemukan....")
+				fmt.Println("              ID tidak ditemukan")
+				cariDataWarga(user,banyakOrang)
 			} else {
 				tampilanData(temp[idx])
 			}
 		}
 
 	} else if inputPilihan == 2 {
-		fmt.Println("|-----------------------------------------------|")
-		fmt.Println("|          BINARY SEARCH BERDASARKAN NAMA       |")
-		fmt.Println("|-----------------------------------------------|")
-		fmt.Print("Masukkan Nama warga yang mau dicari: ")
-		fmt.Scan(&cariNama)
-		fmt.Println("")
-
-		salinData(user, &temp, banyakOrang)
-		insertionSortNama(&temp, banyakOrang)
-
-		idx = binarySearchNama(&temp, banyakOrang, cariNama)
-		if idx == -1{
-			fmt.Println("Nama tidak dapat ditemukan")
-		} else {
-			tampilanData(temp[idx])
-		}
-
-	} else if inputPilihan == 3 {
 		fmt.Println("|-----------------------------------------------|")
 		fmt.Println("|        SEQUENTIAL SEARCH BERDASARKAN ID       |")
 		fmt.Println("|-----------------------------------------------|")
@@ -584,37 +722,16 @@ func cariDataWarga(user *tabDataSampah, banyakOrang *int) {
 
 		idx = sequentialSearchID(user, banyakOrang, cariID)
 		if idx == -1{
-			fmt.Println("ID tidak ditemukan.....")
+			fmt.Println("                  ID tidak ditemukan")
+			cariDataWarga(user, banyakOrang)
 		} else {
 			tampilanData(user[idx])
 		}
 
-	} else if inputPilihan == 4 {
-		fmt.Println("|-----------------------------------------------|")
-		fmt.Println("|        SEQUENTIAL SEARCH BERDASARKAN NAMA     |")
-		fmt.Println("|-----------------------------------------------|")
-		fmt.Println("Masukkan Nama warga yang mau dicari: ")
-		fmt.Scan(&cariNama)
-
-		idx = sequentialSearchNama(user, banyakOrang, cariNama)
-		if idx == -1{
-			fmt.Println("Nama tidak ditemukan.......")
-		} else {
-			tampilanData(user[idx])
-		}
-
-	} else if inputPilihan == 5{
-		fmt.Println("Kembali ke menu utama......")
-	} else {
-		fmt.Println(" ")
-		fmt.Println("          -- Pilihan tidak tersedia --  ")
-		fmt.Println(" ")
+	} else if inputPilihan == 3 {
+		halamanUtama(user, banyakOrang)
 	}
-
-	fmt.Println("======================<<>>========================")
-	fmt.Println(" ")
-	fmt.Println(" ")
-	halamanUtama(user, banyakOrang)
+	cariDataWarga(user,banyakOrang)
 }
 
 // Procedure Statistik Data Sampah Mingguan
